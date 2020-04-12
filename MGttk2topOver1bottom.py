@@ -8,6 +8,23 @@ from tkinter.ttk import *
 #But this appearance only occur when ttk.Style.theme_use('clam') is defined. 
 ##Other style themes, e.g.'classic', 'default' and 'alt', 
 ##   do not display a handle for the panes of the ttk.Panedwindow widget.
+root = Tk()
+root.geometry("1250x750")
+root.mybg_image = PhotoImage(file ="e:\\ASbackground01.gif")
+label = Label(root, image=root.mybg_image)
+#label.image = self.backgroundphotos[backgroundnames[0]]
+label.place(x=0, y=0)
+
+
+topbuttonframe = Frame(root)
+#self.topbuttonframe.grid_rowconfigure(0, weight=0)
+topbuttonframe.columnconfigure(0, weight=1)
+topbuttonframe.rowconfigure(0, weight=1)
+topbuttonframe.pack() #grid(row=0,column=0,rowspan=4,columnspan=10,sticky=W+E)
+one = Checkbutton(topbuttonframe, text="One",  onvalue=True)
+two = Checkbutton(topbuttonframe, text="Two",  onvalue=True)
+three = Checkbutton(topbuttonframe, text="Three",  onvalue=True)
+
 
 s = Style()
 s.theme_use('clam') #Ubuntu 16.04 using this theme displayed handle btw panes
@@ -22,6 +39,7 @@ s.configure("Sash", background="red",
 # --- create the primary Top/Bottom panedwindow
 primarytopbottom = PanedWindow(orient=VERTICAL)
 primarytopbottom.pack(fill=BOTH, expand=1)
+
 # ---- create a left and right in the Top pane
 topleftrightpair = PanedWindow(primarytopbottom, orient=HORIZONTAL)
 primarytopbottom.add(topleftrightpair)
@@ -29,7 +47,10 @@ primarytopbottom.add(topleftrightpair)
 lefttree = Label(topleftrightpair, text="left pane", relief=SOLID)
 lefttree.configure(background='coral', foreground='green', borderwidth=16) #bd=5, activebackground='coral', highlightbackground='coral', bg="green")
 topleftrightpair.add(lefttree)
-
+bg_image = PhotoImage(file ="e:\\ASbackground01.gif")
+x = Label (image = bg_image)
+#x.image = x.grid(row = 0, column = 0)
+x.image = x.pack()
 righttable = Label(topleftrightpair, text="right pane", relief=SOLID)
 righttable.configure( background='red', foreground='green')#bd=5, activebackground='coral', highlightbackground='coral')
 topleftrightpair.add(righttable)
@@ -110,23 +131,12 @@ s1 = Style()
 s1.theme_use('clam')
 s1.configure('PanedWindow', border='yellow')
 
-me = bottom
-attack1 = Button(me, text="Light Attack")
-attack2 = Button(me, text="Heavy Attack")
-defense1 = Button(me, text="Forcefield")
-defense2 = Button(me, text="Heal")
-attack1.grid(row=0, column=1, sticky="ew")
-attack2.grid(row=0, column=2, sticky="ew")
-defense1.grid(row=1, column=1, sticky="ew")
-defense2.grid(row=1, column=2, sticky="ew")
-
 me = lefttree
 topbuttonframe = Frame(me)
 topbuttonframe.columnconfigure(0, weight=1)
 topbuttonframe.rowconfigure(0, weight=1)
 topbuttonframe.grid(row=0,column=0,rowspan=4,columnspan=10,sticky=W+E)
 tree=Treeview(topbuttonframe)
-
 tree["columns"]=("one","two","three")
 tree.column("#0", width=270, minwidth=125, stretch=NO)
 tree.column("one", width=150, minwidth=150, stretch=NO)
@@ -150,7 +160,8 @@ tree.insert(folder1, "end",  text="photo1.png", values=("23-Jun-17 11:28","PNG f
 tree.insert(folder1, "end",  text="photo2.png", values=("23-Jun-17 11:29","PNG file","3.2 KB"))
 tree.insert(folder1, "end", text="photo3.png", values=("23-Jun-17 11:30","PNG file","3.1 KB"))
 
-tree.grid(row=0,column=0)
+tree.pack(fill=BOTH, expand=1)
+#tree.grid(row=0,column=0,sticky=NSEW)
 
 minwidth = tree.column('#0', option='minwidth')
 tree.column('#0', width=minwidth)
@@ -177,7 +188,13 @@ attack1.grid(row=0, column=1, sticky="ew")
 attack2.grid(row=0, column=2, sticky="ew")
 defense1.grid(row=1, column=1, sticky="ew")
 defense2.grid(row=1, column=2, sticky="ew")
+w = Canvas(me, width=200, height=200)
+w.grid(row=3,column=1)
 
+w.create_image((0,0), anchor=NW, image=root.mybg_image)
+w.create_line(0, 0, 200, 100)
+w.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
+w.create_rectangle(50, 25, 150, 75, fill="blue")
 
 
 
