@@ -24,15 +24,17 @@ topbuttonframe.pack() #grid(row=0,column=0,rowspan=4,columnspan=10,sticky=W+E)
 one = Checkbutton(topbuttonframe, text="One",  onvalue=True)
 two = Checkbutton(topbuttonframe, text="Two",  onvalue=True)
 three = Checkbutton(topbuttonframe, text="Three",  onvalue=True)
+one.pack()
+two.pack()
+three.pack()
 
 
 s = Style()
 s.theme_use('clam') #Ubuntu 16.04 using this theme displayed handle btw panes
 s.configure("PanedWindow", background="red", 
                 border='green')
-s.configure("PanedWindow", background="red", 
-                bordercolor='green')
-
+''' enable & set attributes for the grab bar 'sash' between panes of PanedWindow
+'''
 s.configure("Sash", background="red", 
                 bordercolor='yellow', sashthickness=16)
 #print(s.map("s.PanedWindow"))
